@@ -17,17 +17,27 @@ def quiet(since):
 
 
 
-def test_off_without_runpod_key():
+def test_off_unless_explicitly_enabled():
+    # RunPod puts RUNPOD_API_KEY and RUNPOD_POD_ID in every pod; that is not an opt-in.
     assert idle_stop.load_config({}) is None
-    assert idle_stop.load_config({"RUNPOD_API_KEY": "  "}) is None
+    assert idle_stop.load_config({"RUNPOD_API_KEY": "k", "RUNPOD_POD_ID": "p"}) is None
+    assert idle_stop.load_config({"RUNPOD_AUTO_STOP": "yes", "RUNPOD_API_KEY": "k"}) is None
+
+
+def test_key_prefers_the_user_created_one():
+    on = {"RUNPOD_AUTO_STOP": "1"}
+    assert idle_stop.load_config({**on, "RUNPOD_API_KEY": "pod"}).api_key == "pod"
+    both = {**on, "RUNPOD_API_KEY": "pod", "RUNPOD_STOP_API_KEY": "mine"}
+    assert idle_stop.load_config(both).api_key == "mine"
+    assert idle_stop.load_config(on).api_key == ""
 
 
 def test_config_defaults_clamps_and_bad_values():
-    cfg = idle_stop.load_config({"RUNPOD_API_KEY": "k", "RUNPOD_POD_ID": "abc"})
+    cfg = idle_stop.load_config({"RUNPOD_AUTO_STOP": "1", "RUNPOD_API_KEY": "k", "RUNPOD_POD_ID": "abc"})
     assert cfg.idle_seconds == 30 * 60 and cfg.pod_id == "abc" and cfg.port == 3900
-    low = idle_stop.load_config({"RUNPOD_API_KEY": "k", "RUNPOD_IDLE_MINUTES": "1"})
+    low = idle_stop.load_config({"RUNPOD_AUTO_STOP": "1", "RUNPOD_API_KEY": "k", "RUNPOD_IDLE_MINUTES": "1"})
     assert low.idle_seconds == 5 * 60 and low.problems
-    junk = idle_stop.load_config({"RUNPOD_API_KEY": "k", "RUNPOD_IDLE_MINUTES": "soon"})
+    junk = idle_stop.load_config({"RUNPOD_AUTO_STOP": "1", "RUNPOD_API_KEY": "k", "RUNPOD_IDLE_MINUTES": "soon"})
     assert junk.idle_seconds == 30 * 60 and junk.problems
 
 
@@ -71,7 +81,7 @@ def _loop(feed, cfg, stop_ok=True):
 
 
 def _cfg(**kw):
-    base = {"RUNPOD_API_KEY": "key", "RUNPOD_POD_ID": "pod1", "RUNPOD_IDLE_MINUTES": "30"}
+    base = {"RUNPOD_AUTO_STOP": "1", "RUNPOD_API_KEY": "key", "RUNPOD_POD_ID": "pod1", "RUNPOD_IDLE_MINUTES": "30"}
     return idle_stop.load_config({**base, **kw})
 
 
@@ -124,12 +134,12 @@ def test_stop_pod_posts_to_runpod_with_bearer_and_no_key_in_logs(capsys):
 
     def opener(request, timeout):
         seen.update(url=request.full_url, method=request.get_method(),
-                    auth=request.get_header("Authorization"))
+                    auth=request.get_header("Authorization"), body=request.data)
         return Resp(b"{}")
 
     assert idle_stop.stop_pod("pod/1", "secret-key", opener)
-    assert seen == {"url": "https://rest.runpod.io/v1/pods/pod%2F1/stop", "method": "POST",
-                    "auth": "Bearer secret-key"}
+    assert seen == {"url": "https://api.runpod.io/v2/pods/pod%2F1/action", "method": "POST",
+                    "auth": "Bearer secret-key", "body": b'{"action": "stop"}'}
 
     def refuse(request, timeout):
         raise urllib.error.HTTPError(request.full_url, 401, "no", {}, None)

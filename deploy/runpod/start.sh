@@ -8,7 +8,7 @@
 # - Starts the Sarvam ASR proxy on loopback when SARVAM_API_KEY is set.
 # - Copies every exported project bundle to /workspace/projects/.
 # - Stops the pod after RUNPOD_IDLE_MINUTES (default 30) without backend
-#   activity when RUNPOD_API_KEY is set (deploy/runpod/idle_stop.py).
+#   activity when RUNPOD_AUTO_STOP=1 (deploy/runpod/idle_stop.py).
 #
 # START_SH_DRY_RUN=1 prints what would run instead of running it (tests).
 # RUNPOD_WORKSPACE and APP_DIR override /workspace and /app (tests only).
@@ -82,9 +82,9 @@ if [[ -n "${SARVAM_API_KEY:-}" ]]; then
   fi
 fi
 
-if [[ -n "${RUNPOD_API_KEY:-}" ]]; then
+if [[ "${RUNPOD_AUTO_STOP:-}" == "1" ]]; then
   if [[ -z "${RUNPOD_POD_ID:-}" ]]; then
-    warn "RUNPOD_API_KEY is set but RUNPOD_POD_ID is not (RunPod sets it inside a pod); idle auto-stop is off."
+    warn "RUNPOD_AUTO_STOP=1 but RUNPOD_POD_ID is not set (RunPod sets it inside a pod); idle auto-stop is off."
   elif [[ -f "${APP_DIR}/deploy/runpod/idle_stop.py" ]]; then
     idle_cmd=(python3 "${APP_DIR}/deploy/runpod/idle_stop.py")
     if dry_run; then
@@ -93,7 +93,7 @@ if [[ -n "${RUNPOD_API_KEY:-}" ]]; then
       "${idle_cmd[@]}" &
     fi
   else
-    warn "RUNPOD_API_KEY is set but deploy/runpod/idle_stop.py is not in this image; idle auto-stop is off."
+    warn "RUNPOD_AUTO_STOP=1 but deploy/runpod/idle_stop.py is not in this image; idle auto-stop is off."
   fi
 fi
 

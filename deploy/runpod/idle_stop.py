@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Stop this RunPod pod after a period with no backend activity (personal v1).
 
-Off unless RUNPOD_API_KEY is set. Polls the backend's own ``/system/activity``
+Off unless RUNPOD_AUTO_STOP=1. (RunPod itself sets RUNPOD_POD_ID and
+RUNPOD_API_KEY in every pod, so a key being present is not an opt-in.) Polls the backend's own ``/system/activity``
 (open requests and streams, running jobs, downloads), and when nothing has
 happened for RUNPOD_IDLE_MINUTES (default 30, minimum 5) asks the RunPod API to
-stop this pod (``RUNPOD_POD_ID`` is set by RunPod). A stopped pod keeps its
+stop this pod. The key is RUNPOD_STOP_API_KEY when set (a key you created in the
+RunPod console), otherwise the RUNPOD_API_KEY that RunPod provides in the pod. A stopped pod keeps its
 network volume and stops billing for the GPU.
 
 Conservative on purpose: an unreachable or unreadable backend counts as busy,
@@ -28,7 +30,7 @@ from typing import Callable, Optional
 DEFAULT_IDLE_MINUTES = 30.0
 MIN_IDLE_MINUTES = 5.0
 DEFAULT_POLL_SECONDS = 60.0
-RUNPOD_STOP_URL = "https://rest.runpod.io/v1/pods/{pod_id}/stop"
+RUNPOD_STOP_URL = "https://api.runpod.io/v2/pods/{pod_id}/action"
 ACTIVITY_URL = "http://127.0.0.1:{port}/system/activity"
 
 
@@ -84,7 +86,7 @@ def stop_pod(pod_id: str, api_key: str, opener: Callable = urllib.request.urlope
         RUNPOD_STOP_URL.format(pod_id=urllib.request.quote(pod_id, safe="")),
         method="POST",
         headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        data=b"{}",
+        data=b'{"action": "stop"}',
     )
     try:
         with opener(request, timeout=30) as response:
@@ -109,10 +111,10 @@ class Config:
 
 
 def load_config(env: dict) -> Optional[Config]:
-    """None when auto-stop is off (no RUNPOD_API_KEY). Bad values fall back."""
-    api_key = (env.get("RUNPOD_API_KEY") or "").strip()
-    if not api_key:
+    """None when auto-stop is off (RUNPOD_AUTO_STOP is not 1). Bad values fall back."""
+    if (env.get("RUNPOD_AUTO_STOP") or "").strip() != "1":
         return None
+    api_key = (env.get("RUNPOD_STOP_API_KEY") or env.get("RUNPOD_API_KEY") or "").strip()
     problems = []
     try:
         minutes = float(env.get("RUNPOD_IDLE_MINUTES") or DEFAULT_IDLE_MINUTES)
@@ -158,10 +160,13 @@ def run(config: Config, *, read=read_activity, stop=stop_pod,
 def main() -> int:
     config = load_config(dict(os.environ))
     if config is None:
-        log("RUNPOD_API_KEY is not set; auto-stop is off.")
+        log("RUNPOD_AUTO_STOP is not 1; auto-stop is off.")
         return 0
     for problem in config.problems:
         log(problem)
+    if not config.api_key:
+        log("no RUNPOD_STOP_API_KEY or RUNPOD_API_KEY available; auto-stop is off.")
+        return 1
     if not config.pod_id:
         log("RUNPOD_POD_ID is not set (RunPod sets it inside a pod); auto-stop is off.")
         return 1

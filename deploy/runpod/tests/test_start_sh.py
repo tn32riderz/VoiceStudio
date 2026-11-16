@@ -122,13 +122,15 @@ def test_project_bundles_are_kept_on_the_volume(tmp_path):
     assert (tmp_path / "workspace" / "projects").is_dir()
 
 
-def test_idle_stop_is_off_without_a_runpod_key(tmp_path):
-    result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY)
+def test_idle_stop_is_off_unless_enabled(tmp_path):
+    # RunPod sets these two in every pod; they alone must not start auto-stop.
+    result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, RUNPOD_API_KEY="rp-key", RUNPOD_POD_ID="pod1")
     assert "IDLE_STOP" not in result.stdout
 
 
 def test_idle_stop_needs_the_pod_id(tmp_path):
-    result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, RUNPOD_API_KEY="rp-secret-key")
+    result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, RUNPOD_API_KEY="rp-secret-key",
+                 RUNPOD_AUTO_STOP="1")
     assert "IDLE_STOP" not in result.stdout
     assert "RUNPOD_POD_ID is not" in result.stderr
     assert "rp-secret-key" not in result.stdout + result.stderr
@@ -139,6 +141,6 @@ def test_idle_stop_starts_when_key_and_pod_id_are_set(tmp_path):
     app.mkdir(parents=True)
     (app / "idle_stop.py").write_text("")
     result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, RUNPOD_API_KEY="rp-secret-key",
-                 RUNPOD_POD_ID="pod1")
+                 RUNPOD_POD_ID="pod1", RUNPOD_AUTO_STOP="1")
     assert f"IDLE_STOP python3 {tmp_path}/app/deploy/runpod/idle_stop.py" in result.stdout
     assert "rp-secret-key" not in result.stdout + result.stderr

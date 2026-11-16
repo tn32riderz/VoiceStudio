@@ -15,7 +15,7 @@ screen, tell me and I will correct this file.
 | RunPod template | `OMNIVOICE_API_KEY` | your 40+ character key |
 | RunPod template | `SARVAM_API_KEY` | from the Sarvam dashboard (Tamil transcription) |
 | RunPod template | `ANTHROPIC_API_KEY` | from the Anthropic Console, monthly spend limit set |
-| RunPod template | `RUNPOD_API_KEY` | optional: lets the pod stop itself when idle |
+| RunPod template | `RUNPOD_AUTO_STOP` | optional: `1` lets the pod stop itself when idle |
 | Mac app | **Settings → Sharing → Remote backend** | `https://<pod-id>-3900.proxy.runpod.net` + your `OMNIVOICE_API_KEY` |
 | Mac app | **Settings → LLM Providers** | **Anthropic (Claude)** active, key comes from the pod's `ANTHROPIC_API_KEY` |
 | Dub page | **Engine** (translation) | the LLM engine, not Google/NLLB |
@@ -47,12 +47,16 @@ provider is Anthropic and the source language is Tamil (`presets/tanglish-dub/`)
 
 ## Idle auto-stop
 
-Set `RUNPOD_API_KEY` in the template. The pod then stops itself after 30
+Set `RUNPOD_AUTO_STOP=1` in the template. The pod then stops itself after 30
 minutes with no backend activity (running jobs, downloads, open requests).
+RunPod provides `RUNPOD_POD_ID` and `RUNPOD_API_KEY` inside every pod, and the
+script uses them. If RunPod refuses the stop (see the pod's log), create a key
+in RunPod → Settings → API Keys and add it as `RUNPOD_STOP_API_KEY`.
 
 | Variable | Default | Meaning |
 | --- | --- | --- |
-| `RUNPOD_API_KEY` | unset (off) | RunPod API key; lets the pod stop itself |
+| `RUNPOD_AUTO_STOP` | unset (off) | `1` turns auto-stop on |
+| `RUNPOD_STOP_API_KEY` | unset | your own RunPod API key, used instead of the one RunPod provides |
 | `RUNPOD_IDLE_MINUTES` | 30 (minimum 5) | idle time before stopping |
 | `RUNPOD_IDLE_IGNORE_STREAMS` | unset | `1` = a Mac app left open with nothing running does not keep the pod alive |
 

@@ -66,7 +66,7 @@ for the keys, not plain values:
 | `SARVAM_API_KEY` | for Tanglish ASR (Change 2) | from the Sarvam dashboard |
 | `KEYTERMS_FILE` | optional | e.g. `/workspace/keyterms.txt` to edit Sarvam keyterms without rebuilding |
 | `ANTHROPIC_API_KEY` | for Claude translation (Change 3) | from the Anthropic Console; set a monthly spend limit there first. A truncated key is refused at start |
-| `RUNPOD_API_KEY` | only for idle auto-stop (Change 5) | RunPod → Settings → API Keys; auto-stop stays off without it |
+| `RUNPOD_AUTO_STOP` | optional | `1` turns on idle auto-stop (Change 5). RunPod already provides `RUNPOD_POD_ID` and `RUNPOD_API_KEY` inside every pod; if the stop is refused, add `RUNPOD_STOP_API_KEY` (RunPod → Settings → API Keys) |
 | `ELEVENLABS_API_KEY` | optional (Change 9) | only if you add the ElevenLabs engine |
 | `ELEVENLABS_VOICE_ID` | optional (Change 9) | your cloned voice ID, with the key above |
 
@@ -88,6 +88,12 @@ https://<pod-id>-3900.proxy.runpod.net
 ```
 
 `https://<pod-id>-3900.proxy.runpod.net/health` should answer without a key.
+
+RunPod's HTTP proxy (Cloudflare) closes any single request that takes longer than
+**100 seconds** with a `524` error. Long jobs run in the background and report
+progress, so they are not affected; a slow synchronous request, such as a large
+export download, can be. If a request ends in 524, retry it, and tell me which
+action it was.
 
 ## 4. The Mac app
 
@@ -143,7 +149,7 @@ limit in the Anthropic Console.
 ## Idle auto-stop and workflow (Change 5)
 
 [WORKFLOW.md](WORKFLOW.md) has the per-video routine and every setting. With
-`RUNPOD_API_KEY` set, `idle_stop.py` stops the pod after `RUNPOD_IDLE_MINUTES`
+`RUNPOD_AUTO_STOP=1`, `idle_stop.py` stops the pod after `RUNPOD_IDLE_MINUTES`
 (default 30) without backend activity; it is off otherwise. Exported project
 bundles are also copied to `/workspace/projects/`.
 
