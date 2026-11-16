@@ -120,6 +120,16 @@ start the same one. After a new deploy, update the Backend URL.
    `/workspace` with no new download (the pod log shows no download progress,
    and `du -sh /workspace/hf_cache` stays the same).
 
+## Translation preset (Change 3)
+
+When the active LLM provider is `anthropic` and the source language is Tamil,
+`/dub/translate` pre-fills the style prompt and glossary from
+`presets/tanglish-dub/` (your own brief and glossary entries always win). Set
+`OMNIVOICE_TRANSLATE_PRESET=tanglish-dub` to force it for any source language,
+or `off` to disable it. Edit the two files in that folder to change the
+defaults. Translation is billed per token by Anthropic; set a monthly spend
+limit in the Anthropic Console.
+
 ## Security
 
 - The RunPod proxy URL is **public internet**. Upstream recommends against

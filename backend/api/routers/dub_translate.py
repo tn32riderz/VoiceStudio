@@ -493,6 +493,10 @@ async def dub_translate(req: TranslateRequest):
                 "code": "source_language_required",
             })
 
+        from services import translation_preset
+        translation_preset.apply_defaults(
+            req, src_lang, LANG_NAMES.get(req.target_lang, req.target_lang))
+
         # Offline NLLB Transformer Translation
         if provider == "nllb":
             requested = [src_lang, req.target_lang, *(seg.target_lang for seg in req.segments if seg.target_lang)]

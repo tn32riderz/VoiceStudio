@@ -12,5 +12,9 @@ RUN chmod 0755 /app/deploy/runpod/start.sh
 COPY tools/sarvam_asr_proxy/ /app/tools/sarvam_asr_proxy/
 RUN python3 -c "import tools.sarvam_asr_proxy.app"
 
+# Tanglish translation preset (Change 3): style prompt + glossary, applied by
+# backend/services/translation_preset.py when the anthropic provider is active.
+COPY presets/ /app/presets/
+
 EXPOSE 3900
 ENTRYPOINT ["/app/deploy/runpod/start.sh"]
