@@ -64,6 +64,7 @@ for the keys, not plain values:
 | --- | --- | --- |
 | `OMNIVOICE_API_KEY` | yes | the key from step 2 (40+ characters recommended; under 24 is refused) |
 | `SARVAM_API_KEY` | for Tanglish ASR (Change 2) | from the Sarvam dashboard |
+| `KEYTERMS_FILE` | optional | e.g. `/workspace/keyterms.txt` to edit Sarvam keyterms without rebuilding |
 | `ANTHROPIC_API_KEY` | for Claude translation (Change 3) | from the Anthropic Console; set a monthly spend limit there first. A truncated key is refused at start |
 | `RUNPOD_API_KEY` | only for idle auto-stop (Change 5) | RunPod → Settings → API Keys; auto-stop stays off without it |
 | `ELEVENLABS_API_KEY` | optional (Change 9) | only if you add the ElevenLabs engine |
@@ -99,6 +100,12 @@ https://<pod-id>-3900.proxy.runpod.net
    - **Test connection**, then **Save & reload**.
 3. Finish the setup wizard. It runs against the pod and downloads the models
    to `/workspace`.
+4. For Tanglish transcription (needs `SARVAM_API_KEY` on the pod):
+   **Settings → Models → ASR → OpenAI-compatible (remote server)**, Server URL
+   `http://127.0.0.1:9876/v1`, Model `saaras-v4-codemix`, API key empty,
+   **Test connection**, then **Use**. The URL is loopback *on the pod*: the
+   backend calls the proxy, not the Mac. Details in
+   [the proxy README](../../tools/sarvam_asr_proxy/README.md).
 
 The pod ID changes when you deploy a new pod, though not when you stop and
 start the same one. After a new deploy, update the Backend URL.

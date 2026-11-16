@@ -1,0 +1,25 @@
+# Terms that bias Sarvam recognition (Saaras v4 keyterms). One per line,
+# at most 50, each at most 64 characters. Edit freely, or point KEYTERMS_FILE
+# at your own copy (for example /workspace/keyterms.txt) to change it without
+# rebuilding the image.
+Figma
+React
+Claude
+Claude Code
+API
+JavaScript
+TypeScript
+Python
+GitHub
+VS Code
+ChatGPT
+OpenAI
+Anthropic
+YouTube
+Next.js
+Tailwind
+Node.js
+Supabase
+Vercel
+UI
+UX
