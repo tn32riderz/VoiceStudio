@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "ステム (.zip)",
     "nothing_selected": "何も選択されていないか、トラックが利用できません",
     "stretch_subs_note": "動画引き伸ばし：字幕は別途エクスポートしてください。",
-    "undubbed_video_note": "まだ吹き替えがありません。動画は元の音声のままです。字幕を焼き込むと文字起こしが追加されます。"
+    "undubbed_video_note": "まだ吹き替えがありません。動画は元の音声のままです。字幕を焼き込むと文字起こしが追加されます。",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "モデルパック",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "予測音声は約{{est}}秒、使用可能時間は{{avail}}秒です。調整できる範囲を約{{seconds}}秒超えており、音声が切り詰められます。生成前に文章を短くしてください。",
     "plan_tight": "余裕が少ない",
     "plan_tight_title": "予測音声は約{{est}}秒、使用可能時間は{{avail}}秒です。スマートフィットで調整できますが、音声の速度上昇や動画の減速が目立ちます。より自然な結果にするには文章を短くしてください。",
-    "replace_toggle": "検索と置換"
+    "replace_toggle": "検索と置換",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "アップデートを確認中…",

@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "ลำต้น (.zip)",
     "nothing_selected": "ไม่ได้เลือกหรือติดตามอะไรไม่ได้",
     "stretch_subs_note": "ยืดวิดีโอ: ส่งออกคำบรรยายแยกต่างหาก",
-    "undubbed_video_note": "ยังไม่มีการพากย์: วิดีโอใช้เสียงต้นฉบับ ฝังคำบรรยายเพื่อเพิ่มบทถอดเสียง"
+    "undubbed_video_note": "ยังไม่มีการพากย์: วิดีโอใช้เสียงต้นฉบับ ฝังคำบรรยายเพื่อเพิ่มบทถอดเสียง",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "ชุดโมเดล",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "คาดว่าเสียงพูดจะยาว ≈{{est}}วิ แต่มีเวลา {{avail}}วิ เกินขีดจำกัดการปรับประมาณ {{seconds}}วิ จึงจะถูกตัดเสียง โปรดย่อข้อความก่อนสร้างเสียง",
     "plan_tight": "พอดีแบบกระชั้น",
     "plan_tight_title": "คาดว่าเสียงพูดจะยาว ≈{{est}}วิ แต่มีเวลา {{avail}}วิ การปรับอัจฉริยะรองรับได้โดยเร่งเสียงอย่างสังเกตได้หรือชะลอวิดีโอ โปรดย่อข้อความเพื่อผลลัพธ์ที่ดีกว่า",
-    "replace_toggle": "ค้นหาและแทนที่"
+    "replace_toggle": "ค้นหาและแทนที่",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "กำลังตรวจสอบอัปเดต…",

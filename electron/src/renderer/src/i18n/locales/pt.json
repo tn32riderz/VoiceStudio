@@ -1966,7 +1966,13 @@
     "pkg_stems_title": "Hastes (.zip)",
     "nothing_selected": "Nada selecionado ou faixa indisponível",
     "stretch_subs_note": "Esticar vídeo: exporte as legendas separadamente.",
-    "undubbed_video_note": "Ainda sem dublagem: o vídeo mantém o áudio original. Grave as legendas na imagem para adicionar a transcrição."
+    "undubbed_video_note": "Ainda sem dublagem: o vídeo mantém o áudio original. Grave as legendas na imagem para adicionar a transcrição.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Pacotes de modelos",
@@ -2667,7 +2673,12 @@
     "plan_impossible_title": "Fala prevista ≈{{est}}s para {{avail}}s disponíveis. Cerca de {{seconds}}s excedem qualquer ajuste possível e o áudio seria cortado. Encurte o texto antes de gerar.",
     "plan_tight": "Ajuste apertado",
     "plan_tight_title": "Fala prevista ≈{{est}}s para {{avail}}s disponíveis. O ajuste inteligente pode compensar com uma aceleração audível ou desaceleração do vídeo. Encurte o texto para um resultado melhor.",
-    "replace_toggle": "Localizar e substituir"
+    "replace_toggle": "Localizar e substituir",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Procurando atualizações…",

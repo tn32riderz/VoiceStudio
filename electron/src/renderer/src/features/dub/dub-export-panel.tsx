@@ -16,6 +16,7 @@ import {
   type DubExportFormat,
 } from './dub-export';
 import { setDubExportPreferences, type DubSession } from './dub-session';
+import { timingFlagsForTracks, type TrackTimingFlags } from './dub-timing-gate';
 
 export function DubExportPanel({ session, disabled }: { session: DubSession; disabled: boolean }) {
   const { t } = useTranslation();
@@ -45,6 +46,7 @@ export function DubExportPanel({ session, disabled }: { session: DubSession; dis
   const setBitrate = (bitrate: string) => setDubExportPreferences({ bitrate });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [gate, setGate] = useState<TrackTimingFlags[] | null>(null);
   const pending = useRef(false);
   const tracks = ['original', ...session.tracks];
   const selected = tracks.filter((code) => !excluded.includes(code));
@@ -76,12 +78,22 @@ export function DubExportPanel({ session, disabled }: { session: DubSession; dis
     stems: t('exportModal.pkg_stems_title'),
     clips: t('exportModal.pkg_clips_title'),
   };
-  const save = async () => {
+  const save = async (skipGate = false) => {
     if (!ready || locked || pending.current) return;
     pending.current = true;
     setSaving(true);
     setError(null);
+    setGate(null);
     try {
+      // Export gate: list rushed or won't-fit lines of the dubbed tracks first.
+      const dubbed = selected.filter((code) => code !== 'original' && session.tracks.includes(code));
+      if (!skipGate && !transcript && dubbed.length) {
+        const flagged = await timingFlagsForTracks(session.segments, dubbed);
+        if (flagged.length) {
+          setGate(flagged);
+          return;
+        }
+      }
       if (undubbed && (transcript || format === 'mp4'))
         await syncDubTranscript(session.jobId!, session.segments);
       const request = dubExportRequest({
@@ -251,6 +263,51 @@ export function DubExportPanel({ session, disabled }: { session: DubSession; dis
           {saving ? <LoaderCircleIcon className="animate-spin" /> : <DownloadIcon />}
           {t(saving ? 'common.loading' : 'exportModal.export')}
         </Button>
+        {gate && (
+          <div
+            role="alert"
+            className="space-y-2 rounded-lg border border-warning/30 bg-warning/5 p-2.5 text-xs"
+          >
+            <p className="font-medium">{t('exportModal.timing_gate_title')}</p>
+            {gate.map(({ code, flags }) => (
+              <div key={code} className="space-y-1">
+                <p className="text-muted-foreground">{code.toUpperCase()}</p>
+                <ul className="space-y-0.5">
+                  {flags.slice(0, 8).map((flag) => (
+                    <li key={flag.id} className="flex gap-2">
+                      <span className="shrink-0 tabular-nums text-muted-foreground">
+                        {flag.start.toFixed(1)}s
+                      </span>
+                      <span className="shrink-0 font-medium">
+                        {t(
+                          flag.kind === 'rushed'
+                            ? 'exportModal.timing_gate_rushed'
+                            : 'exportModal.timing_gate_impossible',
+                        )}
+                      </span>
+                      <span dir="auto" className="min-w-0 flex-1 truncate">
+                        {flag.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                {flags.length > 8 && (
+                  <p className="text-muted-foreground">
+                    {t('exportModal.timing_gate_more', { count: flags.length - 8 })}
+                  </p>
+                )}
+              </div>
+            ))}
+            <div className="flex gap-2">
+              <Button size="xs" variant="outline" onClick={() => setGate(null)}>
+                {t('exportModal.timing_gate_cancel')}
+              </Button>
+              <Button size="xs" onClick={() => void save(true)}>
+                {t('exportModal.timing_gate_export_anyway')}
+              </Button>
+            </div>
+          </div>
+        )}
       </fieldset>
       {error && (
         <PipelineFailure fallback={error} onDismiss={() => setError(null)} className="text-xs" />

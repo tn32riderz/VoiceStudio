@@ -130,6 +130,16 @@ or `off` to disable it. Edit the two files in that folder to change the
 defaults. Translation is billed per token by Anthropic; set a monthly spend
 limit in the Anthropic Console.
 
+## Timing lock (Change 4)
+
+- A line whose text would be spoken more than 1.25× the language's normal rate
+  gets a **Rushed** row in the Dub editor with a **Shorten** button (the duration
+  planner's condensation; it needs an LLM provider, e.g. `anthropic`).
+- **Export** first lists every rushed or won't-fit line of the dubbed tracks and
+  asks for **Export anyway**. Transcript-only exports skip the check.
+- Already in place and unchanged: `strict_slot` and Per line are the Dub page
+  defaults, and every segment edge has a 15 ms fade.
+
 ## Security
 
 - The RunPod proxy URL is **public internet**. Upstream recommends against

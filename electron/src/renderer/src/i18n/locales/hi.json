@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "तने (.ज़िप)",
     "nothing_selected": "कुछ भी चयनित नहीं या ट्रैक अनुपलब्ध है",
     "stretch_subs_note": "वीडियो खींचें: उपशीर्षक अलग से निर्यात करें।",
-    "undubbed_video_note": "अभी डब नहीं है: वीडियो में मूल ऑडियो रहेगा। ट्रांसक्रिप्ट जोड़ने के लिए सबटाइटल वीडियो में जोड़ें।"
+    "undubbed_video_note": "अभी डब नहीं है: वीडियो में मूल ऑडियो रहेगा। ट्रांसक्रिप्ट जोड़ने के लिए सबटाइटल वीडियो में जोड़ें।",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "मॉडल पैक",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "अनुमानित बोलने का समय ≈{{est}}से है, उपलब्ध समय {{avail}}से है। लगभग {{seconds}}से किसी भी समायोजन से नहीं समा सकते और ऑडियो कटेगा। बनाने से पहले पाठ छोटा करें।",
     "plan_tight": "मुश्किल से फिट",
     "plan_tight_title": "अनुमानित बोलने का समय ≈{{est}}से है, उपलब्ध समय {{avail}}से है। स्मार्ट फिट इसे समायोजित कर सकता है, लेकिन आवाज़ तेज़ या वीडियो धीमा होगा। बेहतर परिणाम के लिए पाठ छोटा करें।",
-    "replace_toggle": "खोजें और बदलें"
+    "replace_toggle": "खोजें और बदलें",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "अपडेट की जाँच हो रही है…",

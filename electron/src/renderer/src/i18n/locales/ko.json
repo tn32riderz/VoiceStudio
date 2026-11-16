@@ -1964,7 +1964,13 @@
     "dual_subs": "번역문 + 원문",
     "export": "내보내기",
     "hardsub": "영상에 자막 입히기",
-    "pkg_stems_title": "분리 트랙(.zip)"
+    "pkg_stems_title": "분리 트랙(.zip)",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "모델 팩",
@@ -2665,7 +2671,12 @@
     "plan_tight_title": "예상 발화 {{est}}초 / 사용 가능 {{avail}}초 — 스마트 맞춤으로 조정할 수 있지만 음성이 빨라지거나 영상이 느려지는 것이 느껴질 수 있습니다. 더 자연스러운 결과를 원하면 텍스트를 줄이세요.",
     "speaker_id": "화자 ID",
     "speaker_title_custom": "화자 — 이름 입력(감지된 화자 복제 음성 없음)",
-    "speaker_title_detected": "화자 — 감지된 화자를 선택하거나 직접 이름 입력"
+    "speaker_title_detected": "화자 — 감지된 화자를 선택하거나 직접 이름 입력",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "업데이트 확인 중…",

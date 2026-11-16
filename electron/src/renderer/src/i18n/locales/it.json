@@ -1966,7 +1966,13 @@
     "pkg_stems_title": "Steli (.zip)",
     "nothing_selected": "Niente selezionato o traccia non disponibile",
     "stretch_subs_note": "Estendi video: esporta i sottotitoli separatamente.",
-    "undubbed_video_note": "Nessun doppiaggio ancora: il video mantiene l’audio originale. Imprimi i sottotitoli per aggiungere la trascrizione."
+    "undubbed_video_note": "Nessun doppiaggio ancora: il video mantiene l’audio originale. Imprimi i sottotitoli per aggiungere la trascrizione.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Pacchetti di modelli",
@@ -2667,7 +2673,12 @@
     "plan_impossible_title": "Parlato previsto ≈{{est}}s su {{avail}}s disponibili. Circa {{seconds}}s superano ogni possibilità di adattamento e l’audio verrebbe tagliato. Accorcia il testo prima di generare.",
     "plan_tight": "Adattamento al limite",
     "plan_tight_title": "Parlato previsto ≈{{est}}s su {{avail}}s disponibili. L’adattamento intelligente può compensare accelerando la voce in modo udibile o rallentando il video. Accorcia il testo per un risultato migliore.",
-    "replace_toggle": "Trova e sostituisci"
+    "replace_toggle": "Trova e sostituisci",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Ricerca aggiornamenti…",

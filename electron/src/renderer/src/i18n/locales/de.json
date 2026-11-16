@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Stämme (.zip)",
     "nothing_selected": "Nichts ausgewählt oder Titel nicht verfügbar",
     "stretch_subs_note": "Video strecken: Untertitel separat exportieren.",
-    "undubbed_video_note": "Noch keine Synchronisation: Das Video behält seinen Originalton. Untertitel einbrennen, um das Transkript hinzuzufügen."
+    "undubbed_video_note": "Noch keine Synchronisation: Das Video behält seinen Originalton. Untertitel einbrennen, um das Transkript hinzuzufügen.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Modellpakete",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Geschätzte Sprache ≈{{est}}s bei {{avail}}s verfügbarer Zeit. Etwa {{seconds}}s lassen sich nicht ausgleichen; Audio würde abgeschnitten. Text vor dem Generieren kürzen.",
     "plan_tight": "Knapp passend",
     "plan_tight_title": "Geschätzte Sprache ≈{{est}}s bei {{avail}}s verfügbarer Zeit. Smart Fit kann dies mit hörbarer Beschleunigung oder langsamerem Video ausgleichen. Für ein besseres Ergebnis den Text kürzen.",
-    "replace_toggle": "Suchen und ersetzen"
+    "replace_toggle": "Suchen und ersetzen",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Nach Updates suchen…",

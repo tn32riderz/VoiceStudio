@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Kökler (.zip)",
     "nothing_selected": "Hiçbir şey seçilmedi veya parça mevcut değil",
     "stretch_subs_note": "Videoyu Uzat: altyazıları ayrı dışa aktarın.",
-    "undubbed_video_note": "Henüz dublaj yok: video özgün sesini korur. Dökümü eklemek için altyazıları görüntüye gömün."
+    "undubbed_video_note": "Henüz dublaj yok: video özgün sesini korur. Dökümü eklemek için altyazıları görüntüye gömün.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Model paketleri",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Tahmini konuşma ≈{{est}}sn, kullanılabilir süre {{avail}}sn. Yaklaşık {{seconds}}sn hiçbir uyarlamayla karşılanamaz ve ses kesilir. Üretmeden önce metni kısaltın.",
     "plan_tight": "Zar zor sığıyor",
     "plan_tight_title": "Tahmini konuşma ≈{{est}}sn, kullanılabilir süre {{avail}}sn. Akıllı uyarlama, sesi belirgin biçimde hızlandırarak veya videoyu yavaşlatarak bunu karşılayabilir. Daha iyi sonuç için metni kısaltın.",
-    "replace_toggle": "Bul ve değiştir"
+    "replace_toggle": "Bul ve değiştir",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Güncellemeler denetleniyor…",

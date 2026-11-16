@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "莖 (.zip)",
     "nothing_selected": "未選擇任何內容或曲目不可用",
     "stretch_subs_note": "拉伸影片：請單獨匯出字幕。",
-    "undubbed_video_note": "尚未配音：影片保留原始音訊。燒錄字幕即可加入轉寫文字。"
+    "undubbed_video_note": "尚未配音：影片保留原始音訊。燒錄字幕即可加入轉寫文字。",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "模型套件",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "預計語音約{{est}}秒，可用時間為{{avail}}秒。約有{{seconds}}秒超出任何適配方式的調整範圍，音訊將被截斷。請在產生前縮短文字。",
     "plan_tight": "勉強適配",
     "plan_tight_title": "預計語音約{{est}}秒，可用時間為{{avail}}秒。智慧適配可以處理，但會明顯加快語速或減慢影片。縮短文字可獲得更自然的效果。",
-    "replace_toggle": "尋找和取代"
+    "replace_toggle": "尋找和取代",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "正在檢查更新…",

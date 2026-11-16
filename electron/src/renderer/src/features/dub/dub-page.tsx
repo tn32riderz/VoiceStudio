@@ -13,6 +13,7 @@ import { hasCompleteTranslation, multiLangTargets } from '@shared/utils/multiLan
 import { castSpeakers, segmentGenInputs } from '@shared/utils/segments';
 import { clampSegmentEdit } from '@shared/utils/timeline';
 import { DubExportPanel } from './dub-export-panel';
+import { RushedLine } from './rushed-line';
 import { DubEmptyState } from './dub-empty-state';
 import { DubSourcePanel } from './dub-source-panel';
 import { compactSourceLabel } from './dub-source-row';
@@ -2315,6 +2316,11 @@ export function DubPage() {
                                   </Button>
                                 </div>
                               )}
+                              <RushedLine
+                                segment={segment}
+                                code={code}
+                                disabled={busy || Boolean(session.recovery)}
+                              />
                               <div className="text-xs">
                                 {expandedSegmentId === segment.id && (
                                   <div

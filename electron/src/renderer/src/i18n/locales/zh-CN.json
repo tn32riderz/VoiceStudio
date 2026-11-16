@@ -1964,7 +1964,13 @@
     "mp3_compressed": "MP3 · 有损压缩",
     "pkg_clips_title": "逐片段音频（.zip）",
     "pkg_stems_title": "分轨（.zip）",
-    "wav_lossless": "WAV · 无损"
+    "wav_lossless": "WAV · 无损",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "模型包",
@@ -2661,7 +2667,12 @@
     "sync_label": "同步：{{pct}}%",
     "sync_title": "生成音频时长为原音频的 {{pct}}%",
     "translate_error_title": "翻译错误：{{error}}",
-    "vol_title": "音量范围 0% 至 200%"
+    "vol_title": "音量范围 0% 至 200%",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "正在检查更新…",

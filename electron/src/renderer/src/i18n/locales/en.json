@@ -2142,7 +2142,13 @@
     "pkg_stems_title": "Stems (.zip)",
     "nothing_selected": "Nothing is selected, or the track is unavailable.",
     "stretch_subs_note": "Stretch Video: export subtitles separately.",
-    "undubbed_video_note": "No dub yet: the video keeps its original audio. Burn subtitles in to add the transcript."
+    "undubbed_video_note": "No dub yet: the video keeps its original audio. Burn subtitles in to add the transcript.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Model packs",
@@ -2751,7 +2757,12 @@
     "plan_apply_title": "Replace this line with the suggested shorter rewrite: \"{{text}}\"",
     "live_play_title": "Stream this line now (live preview)",
     "live_stop_title": "Stop the live preview",
-    "replace_toggle": "Find and replace"
+    "replace_toggle": "Find and replace",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Checking for updates…",

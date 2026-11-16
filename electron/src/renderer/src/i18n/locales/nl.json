@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Stelen (.zip)",
     "nothing_selected": "Niets geselecteerd of nummer niet beschikbaar",
     "stretch_subs_note": "Video uitrekken: exporteer ondertitels afzonderlijk.",
-    "undubbed_video_note": "Nog geen nasynchronisatie: de video houdt het originele geluid. Brand ondertitels in om het transcript toe te voegen."
+    "undubbed_video_note": "Nog geen nasynchronisatie: de video houdt het originele geluid. Brand ondertitels in om het transcript toe te voegen.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Modelpakketten",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Verwachte spraak ≈{{est}}s bij {{avail}}s beschikbare tijd. Ongeveer {{seconds}}s kan niet worden opgevangen; de audio zou worden afgekapt. Kort de tekst in vóór het genereren.",
     "plan_tight": "Past maar net",
     "plan_tight_title": "Verwachte spraak ≈{{est}}s bij {{avail}}s beschikbare tijd. Slim passend maken kan dit opvangen door hoorbaar snellere spraak of tragere video. Kort de tekst in voor een beter resultaat.",
-    "replace_toggle": "Zoeken en vervangen"
+    "replace_toggle": "Zoeken en vervangen",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Controleren op updates…",

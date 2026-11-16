@@ -4,10 +4,11 @@ import re
 import time
 import asyncio
 import logging
-from typing import Optional
+from typing import Literal, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from api.dependencies import consumer_generation, require_consumer_reads_admin_writes
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 
 from schemas.requests import AgentFitRequest, TranslateRequest
 from services.model_manager import _cpu_pool, _gpu_pool
@@ -1505,4 +1506,61 @@ async def dub_agent_fit(req: AgentFitRequest):
             {"id": segment.id, **rows[str(segment.id)]}
             for segment in req.segments
         ],
+    }
+
+
+class TimingLine(BaseModel):
+    id: str = Field(min_length=1, max_length=128)
+    text: str = Field(max_length=5000)
+    start: float = Field(ge=0, allow_inf_nan=False)
+    end: float = Field(ge=0, allow_inf_nan=False)
+    plan_status: Optional[Literal["fits", "tight", "impossible"]] = None
+
+
+class TimingCheckRequest(BaseModel):
+    lang: str = Field(min_length=1, max_length=32)
+    segments: list[TimingLine] = Field(max_length=5000)
+
+
+@router.post("/dub/timing-check")
+async def dub_timing_check(req: TimingCheckRequest):
+    """List rushed or impossible lines, for the export gate."""
+    from services import timing_guard
+
+    return {
+        "rushed_ratio": timing_guard.RUSHED_RATIO,
+        "flagged": timing_guard.flag_lines(
+            [seg.model_dump() for seg in req.segments], req.lang),
+    }
+
+
+class ShortenRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=5000)
+    start: float = Field(ge=0, allow_inf_nan=False)
+    end: float = Field(ge=0, allow_inf_nan=False)
+    lang: str = Field(min_length=1, max_length=32)
+    source_text: Optional[str] = Field(default=None, max_length=5000)
+
+
+@router.post("/dub/shorten")
+@consumer_generation
+async def dub_shorten(req: ShortenRequest):
+    """Shorten one rushed line to its slot with the planner's condensation."""
+    from services.speech_rate import adjust_for_slot
+
+    slot = req.end - req.start
+    if slot <= 0:
+        raise HTTPException(status_code=400, detail="The line has no time slot.")
+    loop = asyncio.get_running_loop()
+    result = await loop.run_in_executor(
+        _cpu_pool,
+        lambda: adjust_for_slot(
+            req.text, slot_seconds=slot, target_lang=req.lang,
+            source_text=req.source_text, strict=True),
+    )
+    return {
+        "text": result["text"],
+        "changed": result["text"] != req.text,
+        "rate_ratio": round(float(result["rate_ratio"]), 3),
+        "error": result.get("error"),
     }

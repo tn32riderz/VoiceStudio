@@ -1988,7 +1988,13 @@
     "pkg_stems_title": "Стемы (.zip)",
     "nothing_selected": "Ничего не выбрано или трек недоступен",
     "stretch_subs_note": "Растяжение видео: экспортируйте субтитры отдельно.",
-    "undubbed_video_note": "Дубляжа пока нет: видео сохранит исходный звук. Вшейте субтитры, чтобы добавить расшифровку."
+    "undubbed_video_note": "Дубляжа пока нет: видео сохранит исходный звук. Вшейте субтитры, чтобы добавить расшифровку.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Пакеты моделей",
@@ -2691,7 +2697,12 @@
     "plan_impossible_title": "Ожидаемая речь ≈{{est}}с, доступно {{avail}}с. Примерно {{seconds}}с превышают возможности подгонки, поэтому звук будет обрезан. Сократите текст перед генерацией.",
     "plan_tight": "Едва помещается",
     "plan_tight_title": "Ожидаемая речь ≈{{est}}с, доступно {{avail}}с. Умная подгонка справится за счёт заметного ускорения речи или замедления видео. Сократите текст для лучшего результата.",
-    "replace_toggle": "Найти и заменить"
+    "replace_toggle": "Найти и заменить",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Проверка обновлений…",

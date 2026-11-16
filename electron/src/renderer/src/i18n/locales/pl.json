@@ -1988,7 +1988,13 @@
     "pkg_stems_title": "Pędy (.zip)",
     "nothing_selected": "Nic nie zostało wybrane lub utwór jest niedostępny",
     "stretch_subs_note": "Rozciąganie wideo: wyeksportuj napisy osobno.",
-    "undubbed_video_note": "Brak dubbingu: wideo zachowa oryginalny dźwięk. Wypal napisy, aby dodać transkrypcję."
+    "undubbed_video_note": "Brak dubbingu: wideo zachowa oryginalny dźwięk. Wypal napisy, aby dodać transkrypcję.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Pakiety modeli",
@@ -2691,7 +2697,12 @@
     "plan_impossible_title": "Przewidywana mowa ≈{{est}}s przy {{avail}}s dostępnego czasu. Około {{seconds}}s przekracza możliwości dopasowania i dźwięk zostałby przycięty. Skróć tekst przed generowaniem.",
     "plan_tight": "Na granicy dopasowania",
     "plan_tight_title": "Przewidywana mowa ≈{{est}}s przy {{avail}}s dostępnego czasu. Inteligentne dopasowanie może to skompensować słyszalnym przyspieszeniem mowy lub spowolnieniem wideo. Skróć tekst, aby uzyskać lepszy wynik.",
-    "replace_toggle": "Znajdź i zamień"
+    "replace_toggle": "Znajdź i zamień",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Sprawdzanie aktualizacji…",

@@ -1988,7 +1988,13 @@
     "pkg_stems_title": "Стебла (.zip)",
     "nothing_selected": "Нічого не вибрано або трек недоступний",
     "stretch_subs_note": "Розтягнення відео: експортуйте субтитри окремо.",
-    "undubbed_video_note": "Дубляжу ще немає: відео збереже оригінальний звук. Вбудуйте субтитри, щоб додати розшифровку."
+    "undubbed_video_note": "Дубляжу ще немає: відео збереже оригінальний звук. Вбудуйте субтитри, щоб додати розшифровку.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Пакети моделей",
@@ -2691,7 +2697,12 @@
     "plan_impossible_title": "Очікуване мовлення ≈{{est}}с, доступно {{avail}}с. Приблизно {{seconds}}с перевищують можливості підгонки, тому звук буде обрізано. Скоротіть текст перед генерацією.",
     "plan_tight": "Ледь уміщується",
     "plan_tight_title": "Очікуване мовлення ≈{{est}}с, доступно {{avail}}с. Розумна підгонка впорається завдяки помітному прискоренню мовлення або сповільненню відео. Скоротіть текст для кращого результату.",
-    "replace_toggle": "Знайти й замінити"
+    "replace_toggle": "Знайти й замінити",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Перевірка оновлень…",

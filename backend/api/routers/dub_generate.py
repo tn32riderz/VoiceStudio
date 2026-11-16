@@ -27,6 +27,7 @@ from services.tts_backend import (
     seed_engine_call,
 )
 from services.dub_batching import batch_timeout_s, native_batch_width
+from services.dub_mix import fade_segment_edges
 from services.audio_dsp import MASTERING_CHAIN, apply_mastering, normalize_audio, apply_effects_chain, get_effect_chain, trim_speech_padding
 from services.audio_io import atomic_save_wav, audio_info, _safe_torchaudio_save
 from services.ffmpeg_utils import (
@@ -2038,11 +2039,7 @@ async def dub_generate(job_id: str, req: DubRequest):
                             "compression_applied": slot_fit == "time_stretch" and wl != int(natural_dur * sr),
                         })
 
-                fade_samples = int(0.015 * sr)
-                if fade_samples > 0 and wl > fade_samples * 2:
-                    ramp = torch.linspace(0.0, 1.0, fade_samples, device=adjusted.device)
-                    adjusted[0, :fade_samples] *= ramp
-                    adjusted[0, -fade_samples:] *= ramp.flip(0)
+                fade_segment_edges(adjusted, sr)
 
                 start_sample = int(place_at * sr)
                 if start_sample < 0:

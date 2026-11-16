@@ -1966,7 +1966,13 @@
     "pkg_stems_title": "Tallos (.zip)",
     "nothing_selected": "No hay nada seleccionado o pista no disponible",
     "stretch_subs_note": "Estirar vídeo: exporta los subtítulos por separado.",
-    "undubbed_video_note": "Aún no hay doblaje: el vídeo conserva su audio original. Incrusta los subtítulos para añadir la transcripción."
+    "undubbed_video_note": "Aún no hay doblaje: el vídeo conserva su audio original. Incrusta los subtítulos para añadir la transcripción.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Paquetes de modelos",
@@ -2667,7 +2673,12 @@
     "plan_impossible_title": "Voz estimada ≈{{est}}s frente a {{avail}}s disponibles. Sobran unos {{seconds}}s que ningún ajuste puede compensar; se recortaría el audio. Acorta el texto antes de generar.",
     "plan_tight": "Ajuste justo",
     "plan_tight_title": "Voz estimada ≈{{est}}s frente a {{avail}}s disponibles. El ajuste inteligente puede compensarlo acelerando la voz de forma audible o ralentizando el vídeo. Acorta el texto para mejorar el resultado.",
-    "replace_toggle": "Buscar y reemplazar"
+    "replace_toggle": "Buscar y reemplazar",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Buscando actualizaciones…",

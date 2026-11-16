@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Thân cây (.zip)",
     "nothing_selected": "Không có gì được chọn hoặc không có bản nhạc",
     "stretch_subs_note": "Kéo giãn video: xuất phụ đề riêng.",
-    "undubbed_video_note": "Chưa có lồng tiếng: video giữ âm thanh gốc. Ghi phụ đề vào hình để thêm bản chép lời."
+    "undubbed_video_note": "Chưa có lồng tiếng: video giữ âm thanh gốc. Ghi phụ đề vào hình để thêm bản chép lời.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Gói mô hình",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Lời nói dự kiến ≈{{est}}giây, thời gian có sẵn {{avail}}giây. Khoảng {{seconds}}giây vượt quá khả năng điều chỉnh nên âm thanh sẽ bị cắt. Hãy rút ngắn văn bản trước khi tạo.",
     "plan_tight": "Vừa sát giới hạn",
     "plan_tight_title": "Lời nói dự kiến ≈{{est}}giây, thời gian có sẵn {{avail}}giây. Căn chỉnh thông minh có thể bù bằng cách tăng tốc giọng nói rõ rệt hoặc làm chậm video. Hãy rút ngắn văn bản để có kết quả tốt hơn.",
-    "replace_toggle": "Tìm và thay thế"
+    "replace_toggle": "Tìm và thay thế",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Đang kiểm tra bản cập nhật…",

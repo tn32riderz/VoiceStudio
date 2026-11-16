@@ -26,3 +26,23 @@ def pcm16_chunks(samples, chunk_samples: int, *, prevent_clipping: bool = False)
             gain = 1.0 / loudest
     for block in blocks():
         yield (np.clip(block * gain, -1.0, 1.0) * 32767.0).astype("<i2").tobytes()
+
+
+EDGE_FADE_SECONDS = 0.015
+
+
+def fade_segment_edges(audio, sample_rate: int, fade_seconds: float = EDGE_FADE_SECONDS):
+    """Fade both ends of one dubbed segment in place (``[channels, samples]``).
+
+    A linear ramp at each edge keeps segment joins click-free. Segments too
+    short to hold two ramps are left untouched. Returns ``audio``.
+    """
+    import torch
+
+    n = int(fade_seconds * sample_rate)
+    length = int(audio.shape[-1])
+    if n > 0 and length > n * 2:
+        ramp = torch.linspace(0.0, 1.0, n, device=audio.device)
+        audio[0, :n] *= ramp
+        audio[0, -n:] *= ramp.flip(0)
+    return audio

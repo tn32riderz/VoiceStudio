@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Stammar (.zip)",
     "nothing_selected": "Inget valt eller spåret är inte tillgängligt",
     "stretch_subs_note": "Sträck video: exportera undertexter separat.",
-    "undubbed_video_note": "Ingen dubbning än: videon behåller originalljudet. Bränn in undertexter för att lägga till transkriptet."
+    "undubbed_video_note": "Ingen dubbning än: videon behåller originalljudet. Bränn in undertexter för att lägga till transkriptet.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Modellpaket",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Beräknat tal ≈{{est}}s, tillgänglig tid {{avail}}s. Cirka {{seconds}}s överskrider vad anpassningen klarar och ljudet skulle klippas. Korta texten före generering.",
     "plan_tight": "Ryms precis",
     "plan_tight_title": "Beräknat tal ≈{{est}}s, tillgänglig tid {{avail}}s. Smart anpassning kan lösa detta med hörbart snabbare tal eller långsammare video. Korta texten för ett bättre resultat.",
-    "replace_toggle": "Sök och ersätt"
+    "replace_toggle": "Sök och ersätt",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Söker efter uppdateringar…",

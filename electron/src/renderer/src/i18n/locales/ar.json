@@ -2012,7 +2012,13 @@
     "pkg_stems_title": "ينبع (.zip)",
     "nothing_selected": "لم يتم تحديد أي شيء أو المسار غير متاح",
     "stretch_subs_note": "تمديد الفيديو: صدّر الترجمة بشكل منفصل.",
-    "undubbed_video_note": "لا توجد دبلجة بعد: يحتفظ الفيديو بصوته الأصلي. انسخ الترجمة على الصورة لإضافة النص."
+    "undubbed_video_note": "لا توجد دبلجة بعد: يحتفظ الفيديو بصوته الأصلي. انسخ الترجمة على الصورة لإضافة النص.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "حزم النماذج",
@@ -2717,7 +2723,12 @@
     "plan_impossible_title": "الكلام المتوقع ≈{{est}}ث والمتاح {{avail}}ث. تتجاوز الزيادة قدرة الملاءمة بنحو {{seconds}}ث وسيُقتطع الصوت. اختصر النص قبل التوليد.",
     "plan_tight": "ملاءمة ضيقة",
     "plan_tight_title": "الكلام المتوقع ≈{{est}}ث والمتاح {{avail}}ث. يمكن للملاءمة الذكية استيعابه بتسريع مسموع أو إبطاء الفيديو. اختصر النص لنتيجة أفضل.",
-    "replace_toggle": "بحث واستبدال"
+    "replace_toggle": "بحث واستبدال",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "جارٍ البحث عن تحديثات…",

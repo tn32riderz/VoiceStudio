@@ -1964,7 +1964,13 @@
     "pkg_stems_title": "Batang (.zip)",
     "nothing_selected": "Tidak ada yang dipilih atau trek tidak tersedia",
     "stretch_subs_note": "Regangkan Video: ekspor subtitel secara terpisah.",
-    "undubbed_video_note": "Belum ada sulih suara: video mempertahankan audio aslinya. Tanamkan subtitle untuk menambahkan transkrip."
+    "undubbed_video_note": "Belum ada sulih suara: video mempertahankan audio aslinya. Tanamkan subtitle untuk menambahkan transkrip.",
+    "timing_gate_title": "Some lines may sound rushed or won't fit their slot. Export anyway?",
+    "timing_gate_rushed": "Rushed",
+    "timing_gate_impossible": "Won't fit",
+    "timing_gate_more": "+{{count}} more",
+    "timing_gate_cancel": "Cancel",
+    "timing_gate_export_anyway": "Export anyway"
   },
   "models": {
     "pack_title": "Paket model",
@@ -2665,7 +2671,12 @@
     "plan_impossible_title": "Perkiraan ucapan ≈{{est}}d, waktu tersedia {{avail}}d. Sekitar {{seconds}}d melebihi kemampuan penyesuaian dan audio akan terpotong. Persingkat teks sebelum membuat audio.",
     "plan_tight": "Hampir tidak muat",
     "plan_tight_title": "Perkiraan ucapan ≈{{est}}d, waktu tersedia {{avail}}d. Penyesuaian cerdas dapat mengatasinya dengan mempercepat suara secara nyata atau memperlambat video. Persingkat teks untuk hasil lebih baik.",
-    "replace_toggle": "Cari dan ganti"
+    "replace_toggle": "Cari dan ganti",
+    "plan_rushed": "Rushed ×{{ratio}}",
+    "plan_rushed_title": "This line would be spoken faster than normal to fit its slot. Shorten it before generating.",
+    "plan_shorten": "Shorten",
+    "plan_shorten_title": "Shorten this line to fit its slot",
+    "shorten_unchanged": "No shorter version found"
   },
   "update": {
     "checking": "Memeriksa pembaruan…",

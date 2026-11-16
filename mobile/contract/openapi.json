@@ -4133,6 +4133,52 @@
     "title": "SfxRequest",
     "type": "object"
    },
+   "ShortenRequest": {
+    "properties": {
+     "end": {
+      "minimum": 0.0,
+      "title": "End",
+      "type": "number"
+     },
+     "lang": {
+      "maxLength": 32,
+      "minLength": 1,
+      "title": "Lang",
+      "type": "string"
+     },
+     "source_text": {
+      "anyOf": [
+       {
+        "maxLength": 5000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Source Text"
+     },
+     "start": {
+      "minimum": 0.0,
+      "title": "Start",
+      "type": "number"
+     },
+     "text": {
+      "maxLength": 5000,
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "text",
+     "start",
+     "end",
+     "lang"
+    ],
+    "title": "ShortenRequest",
+    "type": "object"
+   },
    "SpeechAuthCapabilities": {
     "properties": {
      "browser_session_endpoint": {
@@ -4881,6 +4927,79 @@
      "idle_timeout_seconds"
     ],
     "title": "SystemInfoResponse",
+    "type": "object"
+   },
+   "TimingCheckRequest": {
+    "properties": {
+     "lang": {
+      "maxLength": 32,
+      "minLength": 1,
+      "title": "Lang",
+      "type": "string"
+     },
+     "segments": {
+      "items": {
+       "$ref": "#/components/schemas/TimingLine"
+      },
+      "maxItems": 5000,
+      "title": "Segments",
+      "type": "array"
+     }
+    },
+    "required": [
+     "lang",
+     "segments"
+    ],
+    "title": "TimingCheckRequest",
+    "type": "object"
+   },
+   "TimingLine": {
+    "properties": {
+     "end": {
+      "minimum": 0.0,
+      "title": "End",
+      "type": "number"
+     },
+     "id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+     },
+     "plan_status": {
+      "anyOf": [
+       {
+        "enum": [
+         "fits",
+         "tight",
+         "impossible"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Plan Status"
+     },
+     "start": {
+      "minimum": 0.0,
+      "title": "Start",
+      "type": "number"
+     },
+     "text": {
+      "maxLength": 5000,
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "required": [
+     "id",
+     "text",
+     "start",
+     "end"
+    ],
+    "title": "TimingLine",
     "type": "object"
    },
    "TranscriptSegment": {
@@ -13247,6 +13366,43 @@
     "summary": "Dub Segments Text"
    }
   },
+  "/dub/shorten": {
+   "post": {
+    "description": "Shorten one rushed line to its slot with the planner's condensation.",
+    "operationId": "dub_shorten_dub_shorten_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ShortenRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Dub Shorten"
+   }
+  },
   "/dub/srt/{job_id}": {
    "get": {
     "operationId": "dub_export_srt_dub_srt__job_id__get",
@@ -13447,6 +13603,43 @@
      }
     },
     "summary": "Dub Get Thumb"
+   }
+  },
+  "/dub/timing-check": {
+   "post": {
+    "description": "List rushed or impossible lines, for the export gate.",
+    "operationId": "dub_timing_check_dub_timing_check_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/TimingCheckRequest"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      },
+      "description": "Successful Response"
+     },
+     "422": {
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      },
+      "description": "Validation Error"
+     }
+    },
+    "summary": "Dub Timing Check"
    }
   },
   "/dub/tracks/{job_id}": {
