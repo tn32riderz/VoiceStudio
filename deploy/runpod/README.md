@@ -140,6 +140,13 @@ limit in the Anthropic Console.
 - Already in place and unchanged: `strict_slot` and Per line are the Dub page
   defaults, and every segment edge has a 15 ms fade.
 
+## Idle auto-stop and workflow (Change 5)
+
+[WORKFLOW.md](WORKFLOW.md) has the per-video routine and every setting. With
+`RUNPOD_API_KEY` set, `idle_stop.py` stops the pod after `RUNPOD_IDLE_MINUTES`
+(default 30) without backend activity; it is off otherwise. Exported project
+bundles are also copied to `/workspace/projects/`.
+
 ## Security
 
 - The RunPod proxy URL is **public internet**. Upstream recommends against

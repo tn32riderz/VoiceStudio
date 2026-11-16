@@ -6,6 +6,9 @@
 # - Refuses to start without OMNIVOICE_API_KEY: the RunPod HTTP proxy is
 #   public, so the key is the only thing guarding the backend.
 # - Starts the Sarvam ASR proxy on loopback when SARVAM_API_KEY is set.
+# - Copies every exported project bundle to /workspace/projects/.
+# - Stops the pod after RUNPOD_IDLE_MINUTES (default 30) without backend
+#   activity when RUNPOD_API_KEY is set (deploy/runpod/idle_stop.py).
 #
 # START_SH_DRY_RUN=1 prints what would run instead of running it (tests).
 # RUNPOD_WORKSPACE and APP_DIR override /workspace and /app (tests only).
@@ -38,6 +41,7 @@ fi
 export OMNIVOICE_DATA_DIR="${WORKSPACE}/omnivoice_data"
 export HF_HOME="${WORKSPACE}/hf_cache"
 export OMNIVOICE_SERVER_MODE=1
+export OMNIVOICE_PROJECT_BUNDLE_DIR="${WORKSPACE}/projects"
 
 if [[ ! -d "$WORKSPACE" ]]; then
   die "${WORKSPACE} does not exist. Attach the RunPod network volume at ${WORKSPACE}."
@@ -47,12 +51,13 @@ fi
 if [[ "$(stat -c %d "$WORKSPACE")" == "$(stat -c %d "$(dirname "$WORKSPACE")")" ]]; then
   warn "${WORKSPACE} is not a mounted volume; models will be downloaded again after every pod restart."
 fi
-mkdir -p "$OMNIVOICE_DATA_DIR" "$HF_HOME"
+mkdir -p "$OMNIVOICE_DATA_DIR" "$HF_HOME" "$OMNIVOICE_PROJECT_BUNDLE_DIR"
 
 if dry_run; then
   echo "ENV OMNIVOICE_DATA_DIR=${OMNIVOICE_DATA_DIR}"
   echo "ENV HF_HOME=${HF_HOME}"
   echo "ENV OMNIVOICE_SERVER_MODE=${OMNIVOICE_SERVER_MODE}"
+  echo "ENV OMNIVOICE_PROJECT_BUNDLE_DIR=${OMNIVOICE_PROJECT_BUNDLE_DIR}"
 fi
 
 cd "$APP_DIR"
@@ -74,6 +79,21 @@ if [[ -n "${SARVAM_API_KEY:-}" ]]; then
     fi
   else
     warn "SARVAM_API_KEY is set but tools/sarvam_asr_proxy is not in this image; ASR proxy not started."
+  fi
+fi
+
+if [[ -n "${RUNPOD_API_KEY:-}" ]]; then
+  if [[ -z "${RUNPOD_POD_ID:-}" ]]; then
+    warn "RUNPOD_API_KEY is set but RUNPOD_POD_ID is not (RunPod sets it inside a pod); idle auto-stop is off."
+  elif [[ -f "${APP_DIR}/deploy/runpod/idle_stop.py" ]]; then
+    idle_cmd=(python3 "${APP_DIR}/deploy/runpod/idle_stop.py")
+    if dry_run; then
+      echo "IDLE_STOP ${idle_cmd[*]}"
+    else
+      "${idle_cmd[@]}" &
+    fi
+  else
+    warn "RUNPOD_API_KEY is set but deploy/runpod/idle_stop.py is not in this image; idle auto-stop is off."
   fi
 fi
 

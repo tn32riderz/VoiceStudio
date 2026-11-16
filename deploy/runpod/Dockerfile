@@ -5,7 +5,7 @@
 ARG BASE_IMAGE=ghcr.io/tn32riderz/voicestudio:v1-base
 FROM ${BASE_IMAGE}
 
-COPY deploy/runpod/start.sh /app/deploy/runpod/start.sh
+COPY deploy/runpod/start.sh deploy/runpod/idle_stop.py /app/deploy/runpod/
 RUN chmod 0755 /app/deploy/runpod/start.sh
 # Sarvam ASR proxy (Change 2). Its dependencies (FastAPI, uvicorn, httpx,
 # numpy, python-multipart) and ffmpeg are already in the base image.

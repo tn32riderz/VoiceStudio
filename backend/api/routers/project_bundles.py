@@ -364,6 +364,7 @@ def export_project_bundle(body: BundleExport):
         with _transfer_lock:
             (directory/'index.json').write_text(json.dumps({'id':identifier,'title':manifest['title'],'kind':body.kind,'createdAt':time.time(),'incoming':False}))
             response = _BundleResponse(directory/'project.vsproject',media_type='application/zip',filename=title+'.vsproject')
+            from services.bundle_archive import archive_copy; archive_copy(directory/'project.vsproject',title)
             _prune_exports()
         return response
     except ArchiveError as exc:
