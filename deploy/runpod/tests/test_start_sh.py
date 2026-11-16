@@ -92,9 +92,25 @@ def test_warns_when_proxy_missing_from_image(tmp_path):
     assert "not in this image" in result.stderr
 
 
+def test_rejects_truncated_anthropic_key(tmp_path):
+    result = run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, ANTHROPIC_API_KEY="sk-ant-short")
+    assert result.returncode != 0
+    assert "ANTHROPIC_API_KEY looks truncated" in result.stderr
+    assert "sk-ant-short" not in result.stderr
+
+
+def test_accepts_full_anthropic_key_and_runs_without_one(tmp_path):
+    assert run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY, ANTHROPIC_API_KEY="sk-ant-" + "a" * 90).returncode == 0
+    assert run(tmp_path, OMNIVOICE_API_KEY=GOOD_KEY).returncode == 0
+
+
 def test_never_prints_secrets(tmp_path):
-    secret, sarvam = "x" * 40, "sarvam-secret-value"
-    result = run(tmp_path, with_proxy=True, OMNIVOICE_API_KEY=secret, SARVAM_API_KEY=sarvam)
+    secret, sarvam, anthropic = "x" * 40, "sarvam-secret-value", "sk-ant-" + "b" * 90
+    result = run(
+        tmp_path, with_proxy=True,
+        OMNIVOICE_API_KEY=secret, SARVAM_API_KEY=sarvam, ANTHROPIC_API_KEY=anthropic,
+    )
     for text in (result.stdout, result.stderr):
         assert secret not in text
         assert sarvam not in text
+        assert anthropic not in text

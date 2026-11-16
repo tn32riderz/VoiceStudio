@@ -1,4 +1,4 @@
-# RunPod backend for the Intel Mac (personal Phase 1)
+# RunPod backend for the Intel Mac (personal v1)
 
 The Intel Mac can't run the VoiceStudio backend
 ([#889](https://github.com/debpalash/VoiceStudio/issues/889)), so the backend
@@ -16,11 +16,11 @@ in place of Tailscale.
 ## 1. Build the image (once, then on every push)
 
 1. On the fork, open **Actions** and enable workflows if GitHub asks.
-2. Push to `personal/phase1`, or run **Personal RunPod image →
+2. Push to `personal/v1`, or run **Personal RunPod image →
    Run workflow**. The first build takes about 30–60 minutes; later ones reuse
    the layer cache.
-3. Result: `ghcr.io/tn32riderz/voicestudio:phase1` (also
-   `:phase1-<commit>` for rolling back).
+3. Result: `ghcr.io/tn32riderz/voicestudio:v1` (also
+   `:v1-<commit>` for rolling back).
 4. GHCR creates new packages as **private**. Either:
    - make it public: GitHub → your profile → **Packages → voicestudio →
      Package settings → Change visibility → Public** (the image contains no
@@ -42,7 +42,7 @@ characters. Never put it in the repo.
 
 ## 3. RunPod network volume and template
 
-**Storage → New Network Volume**: 50 GB, in a data centre that has RTX 4090s.
+**Storage → New Network Volume**: 100 GB, in a data centre that has RTX 4090s.
 Models, projects and the Hugging Face cache all live here, so they survive a
 pod stop.
 
@@ -50,7 +50,7 @@ pod stop.
 
 | Field | Value |
 | --- | --- |
-| Container image | `ghcr.io/tn32riderz/voicestudio:phase1` |
+| Container image | `ghcr.io/tn32riderz/voicestudio:v1` |
 | Container disk | 20 GB |
 | Volume mount path | `/workspace` |
 | Expose HTTP ports | `3900` |
@@ -62,9 +62,16 @@ for the keys, not plain values:
 
 | Name | Required | Value |
 | --- | --- | --- |
-| `OMNIVOICE_API_KEY` | yes | the key from step 2 |
+| `OMNIVOICE_API_KEY` | yes | the key from step 2 (40+ characters recommended; under 24 is refused) |
 | `SARVAM_API_KEY` | for Tanglish ASR (Change 2) | from the Sarvam dashboard |
-| `ANTHROPIC_API_KEY` | for Claude translation (Change 3) | from console.anthropic.com |
+| `ANTHROPIC_API_KEY` | for Claude translation (Change 3) | from the Anthropic Console; set a monthly spend limit there first. A truncated key is refused at start |
+| `RUNPOD_API_KEY` | only for idle auto-stop (Change 5) | RunPod → Settings → API Keys; auto-stop stays off without it |
+| `ELEVENLABS_API_KEY` | optional (Change 9) | only if you add the ElevenLabs engine |
+| `ELEVENLABS_VOICE_ID` | optional (Change 9) | your cloned voice ID, with the key above |
+
+Claude translation runs on the pod through the backend's `anthropic` LLM
+provider and is billed per token by Anthropic, separately from a Claude Pro
+plan. See [v1 decisions](../../docs/personal/v1-decisions.md).
 
 `start.sh` sets the rest itself: `OMNIVOICE_DATA_DIR=/workspace/omnivoice_data`,
 `HF_HOME=/workspace/hf_cache`, `OMNIVOICE_SERVER_MODE=1`, backend on

@@ -1,17 +1,17 @@
-# Personal fork only: build the RunPod Phase 1 image.
+# Personal fork only: build the RunPod v1 image.
 #
-#   ghcr.io/<owner>/voicestudio:phase1-base  — deploy/Dockerfile (CUDA), unchanged
-#   ghcr.io/<owner>/voicestudio:phase1       — base + deploy/runpod/Dockerfile layer
-#   ghcr.io/<owner>/voicestudio:phase1-<sha> — the same image, pinned to a commit
+#   ghcr.io/<owner>/voicestudio:v1-base  — deploy/Dockerfile (CUDA), unchanged
+#   ghcr.io/<owner>/voicestudio:v1       — base + deploy/runpod/Dockerfile layer
+#   ghcr.io/<owner>/voicestudio:v1-<sha> — the same image, pinned to a commit
 #
-# Runs on pushes to personal/phase1 and on demand. Never runs upstream: the job
+# Runs on pushes to personal/v1 and on demand. Never runs upstream: the job
 # is skipped in debpalash/VoiceStudio so a merge back cannot publish anything.
 
 name: Personal RunPod image
 
 on:
   push:
-    branches: [personal/phase1]
+    branches: [personal/v1]
     paths-ignore:
       - "**/*.md"
       - "docs/**"
@@ -45,7 +45,7 @@ jobs:
           IMAGE="ghcr.io/${OWNER}/voicestudio"
           {
             echo "image=${IMAGE}"
-            echo "cache=ghcr.io/${OWNER}/voicestudio-buildcache:phase1"
+            echo "cache=ghcr.io/${OWNER}/voicestudio-buildcache:v1"
             echo "short_sha=$(git rev-parse --short=7 HEAD)"
             echo "commit=$(git rev-parse HEAD)"
           } >> "$GITHUB_OUTPUT"
@@ -79,7 +79,7 @@ jobs:
           build-args: |
             BUILD_COMMIT=${{ steps.names.outputs.commit }}
           push: true
-          tags: ${{ steps.names.outputs.image }}:phase1-base
+          tags: ${{ steps.names.outputs.image }}:v1-base
           cache-from: type=registry,ref=${{ steps.names.outputs.cache }}
           cache-to: type=registry,ref=${{ steps.names.outputs.cache }},mode=max,ignore-error=true
 
@@ -89,8 +89,8 @@ jobs:
           context: .
           file: deploy/runpod/Dockerfile
           build-args: |
-            BASE_IMAGE=${{ steps.names.outputs.image }}:phase1-base
+            BASE_IMAGE=${{ steps.names.outputs.image }}:v1-base
           push: true
           tags: |
-            ${{ steps.names.outputs.image }}:phase1
-            ${{ steps.names.outputs.image }}:phase1-${{ steps.names.outputs.short_sha }}
+            ${{ steps.names.outputs.image }}:v1
+            ${{ steps.names.outputs.image }}:v1-${{ steps.names.outputs.short_sha }}

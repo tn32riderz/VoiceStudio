@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# RunPod entrypoint for the personal Phase 1 image (see deploy/runpod/README.md).
+# RunPod entrypoint for the personal v1 image (see deploy/runpod/README.md).
 #
 # - Keeps models, projects and the Hugging Face cache on the RunPod network
 #   volume at /workspace so a stopped pod restarts without re-downloading.
@@ -18,6 +18,7 @@ BACKEND_PORT=3900
 ASR_PROXY_HOST=127.0.0.1
 ASR_PROXY_PORT=9876
 MIN_KEY_LENGTH=24
+MIN_ANTHROPIC_KEY_LENGTH=40
 
 die() { echo "start.sh: $*" >&2; exit 1; }
 warn() { echo "start.sh: warning: $*" >&2; }
@@ -28,6 +29,10 @@ if [[ -z "${OMNIVOICE_API_KEY:-}" ]]; then
 fi
 if (( ${#OMNIVOICE_API_KEY} < MIN_KEY_LENGTH )); then
   die "OMNIVOICE_API_KEY is shorter than ${MIN_KEY_LENGTH} characters. Generate one with: python3 -c 'import secrets; print(secrets.token_urlsafe(32))'"
+fi
+# Optional, but a truncated paste would otherwise only fail mid-translation.
+if [[ -n "${ANTHROPIC_API_KEY:-}" ]] && (( ${#ANTHROPIC_API_KEY} < MIN_ANTHROPIC_KEY_LENGTH )); then
+  die "ANTHROPIC_API_KEY looks truncated (shorter than ${MIN_ANTHROPIC_KEY_LENGTH} characters). Copy it again from the Anthropic Console."
 fi
 
 export OMNIVOICE_DATA_DIR="${WORKSPACE}/omnivoice_data"
