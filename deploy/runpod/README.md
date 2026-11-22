@@ -6,6 +6,9 @@ runs on a RunPod GPU and the Mac app is only the interface. This is the
 [remote GPU backend](../../docs/remote-gpu.md) mode, with RunPod's HTTPS proxy
 in place of Tailscale.
 
+> **Try it free first:** [`deploy/colab`](../colab/README.md) runs the same
+> branch on a free Google Colab T4, in your browser, before you pay for RunPod.
+
 | File | Purpose |
 | --- | --- |
 | `start.sh` | Image entrypoint: checks the API key, stores everything on `/workspace`, starts the Sarvam ASR proxy (if configured) and the backend |
