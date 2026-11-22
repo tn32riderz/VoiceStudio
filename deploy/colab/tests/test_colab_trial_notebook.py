@@ -84,3 +84,16 @@ def test_no_secrets_in_the_notebook_and_values_never_printed():
         if "print(" in line:
             assert "value" not in line.split("print(", 1)[1], line
             assert "os.environ[" not in line.split("print(", 1)[1], line
+
+
+def test_gpu_is_rechecked_after_the_first_unknown_health_answer():
+    # /health says "unknown" until its background GPU lookup finishes
+    # (backend/main.py _cached_health_label), so one early answer is not proof.
+    main = (ROOT / "backend" / "main.py").read_text(encoding="utf-8")
+    assert 'return label or ("unknown", None)' in main
+    source = trial_source()
+    assert 'info.get("device") not in (None, "unknown")' in source
+
+
+def test_prints_the_colab_proxy_link_instead_of_relying_on_a_popup():
+    assert 'eval_js("google.colab.kernel.proxyPort(3900)")' in trial_source()
